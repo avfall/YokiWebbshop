@@ -10,9 +10,10 @@ public class User {
 	private String lastname;
 	private String adress;
 	private String postalCode;
+	private String city;
 	private String country;
 	
-	public User(String email, String password, String firstname, String lastname, String adress, String postalCode, String country) {
+	public User(String email, String password, String firstname, String lastname, String adress, String postalCode, String city, String country) {
 		this.email = email;
 		try {
 			this.password = stringToSHA(password);
@@ -24,6 +25,7 @@ public class User {
 		this.lastname = lastname;
 		this.adress = adress;
 		this.postalCode = postalCode;
+		this.city = city;
 		this.country = country;
 	}
 	
@@ -74,6 +76,14 @@ public class User {
 	
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+	
+	public String getCity() {
+		return this.city;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	public String getCountry() {
