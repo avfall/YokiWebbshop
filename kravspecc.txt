@@ -4,14 +4,14 @@ inventroy databas
 
 
 Customer: 
-email
-pw
-enamn
-fnamn
-gata
-postnr
-stad
-(land)
+string email
+string pw
+string enamn
+string fnamn
+string gata
+int postnr
+string stad
+string (land)
 
 staff:
 email
@@ -20,11 +20,11 @@ pw
 
 
 produkt:
-namn 
-pris
-färg
-antal på lager
-antal sålda
-blid fårn annan url(eller egen uppladdning)
-storlek
+string namn 
+int pris
+stringfärg
+int antal på lager
+int antal sålda
+string?? blid fårn annan url(eller egen uppladdning)
+char storlek
 
