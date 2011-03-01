@@ -1,5 +1,8 @@
 package org.apakossa.server;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class User {
 	private String email;
 	private String password;
@@ -11,9 +14,12 @@ public class User {
 	
 	public User(String email, String password, String firstname, String lastname, String adress, String postalCode, String country) {
 		this.email = email;
-		//TODO add password hash, preferably SHA256
-		this.password = password;
-		
+		try {
+			this.password = stringToSHA(password);
+		}
+		catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.adress = adress;
@@ -30,8 +36,12 @@ public class User {
 	}
 	
 	public void setPassword(String password) {
-		//TODO add password hash
-		this.password = password;
+		try {
+			this.password = stringToSHA(password);
+		}
+		catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getFirstname() {
@@ -72,5 +82,19 @@ public class User {
 	
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	private String stringToSHA(String input) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		md.reset();
+		byte[] buffer = input.getBytes();
+		md.update(buffer);
+		byte[] digest = md.digest();
+	
+		String hexStr = "";
+		for (int i = 0; i < digest.length; i++) {
+			hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
+		}
+		return hexStr;
 	}
 }
